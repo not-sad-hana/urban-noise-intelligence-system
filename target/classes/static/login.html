@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup | Ramapuram Urban Pollution Monitoring</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 20px;
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            max-width: 480px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .auth-header {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 24px;
+            text-align: center;
+        }
+        .auth-header h3 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+        }
+        .area-badge {
+            display: inline-block;
+            background: #10b981;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+        .nav-tabs .nav-link {
+            font-weight: 600;
+            color: #475569;
+            border: none;
+            padding: 14px;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0284c7;
+            border-bottom: 3px solid #0284c7;
+            background: transparent;
+        }
+        .btn-primary {
+            background: #0284c7;
+            border-color: #0284c7;
+            padding: 10px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background: #0369a1;
+            border-color: #0369a1;
+        }
+        .credentials-callout {
+            background: #f1f5f9;
+            border-left: 4px solid #0284c7;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-card">
+    <div class="auth-header">
+        <div class="d-flex justify-content-center align-items-center gap-2">
+            <i class="bi bi-shield-check fs-3 text-warning"></i>
+            <h3>Ramapuram Pollution Monitor</h3>
+        </div>
+        <div class="area-badge">
+            <i class="bi bi-geo-alt-fill"></i> Ramapuram, Chennai Locked (13.010 - 13.050, 80.165 - 80.200)
+        </div>
+    </div>
+
+    <div class="p-4">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs nav-fill mb-4" id="authTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-panel" type="button" role="tab">
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup-panel" type="button" role="tab">
+                    <i class="bi bi-person-plus me-1"></i> Register
+                </button>
+            </li>
+        </ul>
+
+        <div id="alertBox" class="alert d-none" role="alert"></div>
+
+        <div class="tab-content" id="authTabsContent">
+            <!-- Sign In Tab -->
+            <div class="tab-pane fade show active" id="login-panel" role="tabpanel">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="loginUsername" placeholder="e.g. citizen or authority" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-secondary fw-semibold">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm" id="btnLogin">
+                        Sign In <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                </form>
+
+                <div class="credentials-callout">
+                    <div class="fw-bold text-dark mb-1"><i class="bi bi-info-circle me-1"></i> Demo Accounts (Pre-seeded):</div>
+                    <div class="text-muted small"><strong>Citizen (View Only):</strong> <code>citizen</code> / <code>password123</code></div>
+                    <div class="text-muted small"><strong>Authority (Full CRUD):</strong> <code>authority</code> / <code>admin123</code></div>
+                </div>
+            </div>
+
+            <!-- Sign Up Tab -->
+            <div class="tab-pane fade" id="signup-panel" role="tabpanel">
+                <form id="signupForm">
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Full Name</label>
+                        <input type="text" class="form-control" id="signupFullName" placeholder="e.g. Suresh Kumar" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Username</label>
+                        <input type="text" class="form-control" id="signupUsername" placeholder="Unique username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Password</label>
+                        <input type="password" class="form-control" id="signupPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-secondary fw-semibold">Role Selection</label>
+                        <select class="form-select" id="signupRole" required>
+                            <option value="CITIZEN" selected>CITIZEN (Read-Only: View Live Maps, Charts, Suggestions)</option>
+                            <option value="AUTHORITY">AUTHORITY (Full CRUD: Insert/Edit Data, Configure Rules)</option>
+                        </select>
+                        <div class="form-text small">Role controls data write privileges on the Ramapuram grid.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm" id="btnSignup">
+                        Create Account <i class="bi bi-check-circle ms-1"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const alertBox = document.getElementById('alertBox');
+
+    function showAlert(msg, isError = false) {
+        alertBox.className = `alert ${isError ? 'alert-danger' : 'alert-success'} d-block`;
+        alertBox.innerHTML = msg;
+    }
+
+    // Handle Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('auth_token', data.token);
+                localStorage.setItem('auth_user', JSON.stringify(data));
+                showAlert(`Welcome back, ${data.username}! Role: <b>${data.role}</b>. Redirecting...`, false);
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 1000);
+            } else {
+                showAlert(data.error || 'Authentication failed', true);
+            }
+        } catch (err) {
+            showAlert('Server connection failed. Ensure Spring Boot backend is active.', true);
+        }
+    });
+
+    // Handle Sign Up
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById('signupFullName').value.trim();
+        const username = document.getElementById('signupUsername').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        const role = document.getElementById('signupRole').value;
+
+        try {
+            const res = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fullName, username, password, role })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem('auth_token', data.token);
+                localStorage.setItem('auth_user', JSON.stringify(data));
+                showAlert(`Account created successfully! Role: <b>${data.role}</b>. Redirecting...`, false);
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 1200);
+            } else {
+                showAlert(data.error || 'Sign up failed', true);
+            }
+        } catch (err) {
+            showAlert('Server connection failed.', true);
+        }
+    });
+</script>
+</body>
+</html>
